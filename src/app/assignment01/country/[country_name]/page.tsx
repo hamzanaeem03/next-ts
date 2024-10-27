@@ -4,7 +4,7 @@ import Navbar from "../../components/Navbar";
 const CountryName = async ({
   params,
 }: {
-  params: { country_name: string };
+  params: Promise<{ country_name: string }>;
 }) => {
   const { country_name } = await params;
 
@@ -54,7 +54,7 @@ const CountryName = async ({
   return (
     <div>
       <Navbar />
-      <div className="flex flex-col items-center gap-6 bg-gray-50 rounded-xl   m-12 pb-20 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+      <div className="flex flex-col items-center gap-6 bg-gray-50 rounded-xl m-12 pb-20 sm:p-20 font-[family-name:var(--font-geist-sans)]">
         <h1 className="m-4"> Name: {country.name}</h1>
         <h1 className="m-4"> Population: {country.population}</h1>
         <h1 className="m-4"> Capital: {country.capital}</h1>
