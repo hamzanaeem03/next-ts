@@ -20,50 +20,113 @@ const Home = () => {
       isCompleted: true,
     },
   ]);
-
   const handleOnClick = () => {
-    if (todo.trim() !== "") {
-      setTodos([...todos, { id: Date.now(), title: todo, isCompleted: false }]);
-      setTodo("");
-    }
+    setTodos([...todos, { id: Date.now(), title: todo, status: "pending" }]);
+    setTodo("");
   };
 
   const handleDelete = (id) => {
     const filteredId = todos.filter((data) => data.id !== id);
-    setTodos(filteredId);
+    setTodos([...filteredId]);
   };
 
   const handleStatusToggle = (id) => {
-    const updatedTodos = todos.map((data) =>
-      data.id === id ? { ...data, isCompleted: !data.isCompleted } : data
-    );
-    setTodos(updatedTodos);
+    const targetedTodo = todos.find((data) => data.id == id);
+    targetedTodo.isCompleted = !targetedTodo.isCompleted;
+    setTodos([...todos]);
   };
 
   const filteredTodos = todos.filter((data) => {
-    if (filter === "All") return true;
-    if (filter === "Completed") return data.isCompleted;
-    if (filter === "Pending") return !data.isCompleted;
-    return false;
+    if (filter === "All") {
+      return true;
+    }
+    if (filter === "Completed" && data.isCompleted) {
+      return true;
+    }
+    if (filter === "Pending" && !data.isCompleted) {
+      return true;
+    }
   });
-
   return (
     <div className="w-screen h-screen flex">
-      <div className="w-3/4 my-auto flex gap-6 p-4 flex-col justify-center items-center mx-auto">
-        <TodoInput
+      <div className=" w-3/4 my-auto flex gap-6 p-4 flex-col justify-center items-center mx-auto">
+        {/* <TodoInput
           value={todo}
           onChange={(e) => setTodo(e.target.value)}
           onClick={handleOnClick}
-        />
-        <FilterButtons filter={filter} setFilter={setFilter} />
+        /> */}
+        {/* <FilterButtons filter={filter} setFilter={setFilter} /> */}
+        <div className="w-3/4 flex my-auto justify-evenly gap-2">
+          <input
+            className=" rounded-lg border border-gray-700 w-3/4 p-2 "
+            placeholder="Enter Task details"
+            value={value}
+            onChange={onChange}
+          />
+          <button
+            className="w-1/4 border border-gray-700"
+            disabled={value === ""}
+            style={{ opacity: value == "" && 0.7 }}
+            onClick={onClick}
+          >
+            Add Task
+          </button>
+        </div>
+        <div className="flex justify-evenly w-3/4 ">
+          <button
+            className="border border-gray-700 "
+            onClick={() => setFilter("All")}
+            style={{ opacity: filter === "All" && 0.7 }}
+          >
+            All
+          </button>
+          <button
+            onClick={() => setFilter("Completed")}
+            style={{
+              opacity: filter === "Completed" && 0.7,
+              backgroundColor: "lightgreen",
+            }}
+          >
+            Completed
+          </button>
+          <button
+            onClick={() => setFilter("Pending")}
+            style={{
+              opacity: filter === "Pending" && 0.7,
+              backgroundColor: "pink",
+            }}
+          >
+            Pending
+          </button>
+        </div>
         <div className="w-3/4 gap-4 flex flex-col">
           {filteredTodos.map((item) => (
-            <TodoCard
-              item={item}
-              handleStatusToggle={handleStatusToggle}
-              handleDelete={handleDelete}
-              key={item.id}
-            />
+            // <TodoCard
+            //   item={item}
+            //   handleStatusToggle={handleStatusToggle}
+            //   handleDelete={handleDelete}
+            //   key={item.id}
+            // />
+            <div className="w-full flex justify-between items-center p-2  border border-gray-700 text-gray-950 rounded-lg">
+              <p>{item.title}</p>
+              <div className="flex justify-between px-auto items-center w-1/4">
+                <button
+                  style={{
+                    backgroundColor: item.isCompleted ? "lightgreen" : "pink",
+                  }}
+                  onClick={() => handleStatusToggle(item.id)}
+                >
+                  {item.isCompleted ? "completed" : "pending...."}
+                </button>
+                <img
+                  onClick={() => handleDelete(item.id)}
+                  height={20}
+                  width={20}
+                  src="/delete.svg"
+                  alt=""
+                />
+              </div>
+            </div>
           ))}
         </div>
       </div>
