@@ -20,36 +20,36 @@ const Home = () => {
       isCompleted: true,
     },
   ]);
+
   const handleOnClick = () => {
-    setTodos([...todos, { id: Date.now(), title: todo, status: "pending" }]);
-    setTodo("");
+    if (todo.trim() !== "") {
+      setTodos([...todos, { id: Date.now(), title: todo, isCompleted: false }]);
+      setTodo("");
+    }
   };
 
   const handleDelete = (id) => {
     const filteredId = todos.filter((data) => data.id !== id);
-    setTodos([...filteredId]);
+    setTodos(filteredId);
   };
 
   const handleStatusToggle = (id) => {
-    const targetedTodo = todos.find((data) => data.id == id);
-    targetedTodo.isCompleted = !targetedTodo.isCompleted;
-    setTodos([...todos]);
+    const updatedTodos = todos.map((data) =>
+      data.id === id ? { ...data, isCompleted: !data.isCompleted } : data
+    );
+    setTodos(updatedTodos);
   };
 
   const filteredTodos = todos.filter((data) => {
-    if (filter === "All") {
-      return true;
-    }
-    if (filter === "Completed" && data.isCompleted) {
-      return true;
-    }
-    if (filter === "Pending" && !data.isCompleted) {
-      return true;
-    }
+    if (filter === "All") return true;
+    if (filter === "Completed") return data.isCompleted;
+    if (filter === "Pending") return !data.isCompleted;
+    return false;
   });
+
   return (
     <div className="w-screen h-screen flex">
-      <div className=" w-3/4 my-auto flex gap-6 p-4 flex-col justify-center items-center mx-auto">
+      <div className="w-3/4 my-auto flex gap-6 p-4 flex-col justify-center items-center mx-auto">
         <TodoInput
           value={todo}
           onChange={(e) => setTodo(e.target.value)}
