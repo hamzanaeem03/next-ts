@@ -1,4 +1,12 @@
-const FilterButtons = ({ setFilter, filter }) => {
+import React from "react";
+
+// Define the types for the props
+type FilterButtonsProps = {
+  setFilter: (filter: string) => void; // Function that takes a string and returns nothing
+  filter: string; // The current filter value, assumed to be a string
+};
+
+const FilterButtons: React.FC<FilterButtonsProps> = ({ setFilter, filter }) => {
   return (
     <div className="flex justify-evenly w-3/4">
       <button
