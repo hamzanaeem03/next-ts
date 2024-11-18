@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Resume Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Enter Your Details</h2>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name">
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email">
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone">
+        </div>
+        <div class="form-group">
+            <label for="linkedin">LinkedIn:</label>
+            <input type="url" id="linkedin">
+        </div>
+        <div class="form-group">
+            <label for="github">GitHub:</label>
+            <input type="url" id="github">
+        </div>
+        <div class="form-group">
+            <label for="education">Education:</label>
+            <textarea id="education"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="experience">Experience:</label>
+            <textarea id="experience"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="projects">Personal Projects:</label>
+            <textarea id="projects"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="skills">Skills (comma-separated):</label>
+            <input type="text" id="skills">
+        </div>
+        <div class="form-group">
+            <label for="languages">Languages (comma-separated):</label>
+            <input type="text" id="languages">
+        </div>
+        <button id="generate-resume-btn">Generate Resume</button>
+    </div>
+
+    <div class="container">
+        <!-- Full-width Section -->
+        <div id="resume-full-width" class="full-width">
+            <h1 id="resume-name">Your Name</h1>
+            <p id="resume-description">Your description will appear here.</p>
+
+            <div class="contact-info column-container">
+                <div class="column">
+                    <p><strong>Email: </strong><a href="#" id="resume-email">your.email@example.com</a></p>
+                    <p><strong>Phone: </strong><span id="resume-phone">Your phone number</span></p>
+                </div>
+                <div class="column">
+                    <p><strong>LinkedIn: </strong><a href="#" id="resume-linkedin">Your LinkedIn</a></p>
+                    <p><strong>GitHub: </strong><a href="#" id="resume-github">Your GitHub</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Column Layout Section -->
+        <div class="column-container">
+            <!-- Left Column -->
+            <div class="column">
+                <div class="section">
+                    <h2>Education</h2>
+                    <p id="resume-education">Your education details will appear here.</p>
+                </div>
+                <div class="section">
+                    <h2>Personal Projects</h2>
+                    <p id="resume-projects">Your projects will appear here.</p>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="column">
+                <div class="section">
+                    <h2>Skills</h2>
+                    <div class="skills" id="resume-skills">
+                        <!-- Skill chips will be added here -->
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Experience</h2>
+                    <p id="resume-experience">Your experience details will appear here.</p>
+                </div>
+
+                <div class="section">
+                    <h2>Languages</h2>
+                    <div class="languages" id="resume-languages">
+                        <!-- Languages will be added here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="app.ts"></script>
+</body>
+</html>
